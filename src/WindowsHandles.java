@@ -33,4 +33,5 @@ public class WindowsHandles {
 		
 		driver.findElement(By.id("username")).sendKeys(email);
 	}	
+	
 }
