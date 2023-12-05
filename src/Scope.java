@@ -28,13 +28,13 @@ public class Scope {
 		for(int i=0; i<links.size(); i++) {
 			String clickOnLinkTab = Keys.chord(Keys.COMMAND,Keys.ENTER);
 			links.get(i).sendKeys(clickOnLinkTab);			
-		}
-		
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			try {
+				Thread.sleep(3000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		
 		Set<String> tabs = driver.getWindowHandles();
