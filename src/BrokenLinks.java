@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.asserts.SoftAssert;
 
 public class BrokenLinks {
 
@@ -42,6 +43,8 @@ public class BrokenLinks {
 			e.printStackTrace();
 		}
 		
+		SoftAssert softa = new SoftAssert();
+		
 		List<WebElement> links = driver.findElements(By.cssSelector("div[id='gf-BIG'] li a"));
 		
 		for(int i=0; i<links.size(); i++) {
@@ -52,10 +55,10 @@ public class BrokenLinks {
 				conn.setRequestMethod("HEAD");
 				conn.connect();
 				int responseCode = conn.getResponseCode();
-				if(responseCode >= 400) {
-					System.out.println("Found broken link : " + links.get(i).getText() + " with response code : " + responseCode);
-//					Assert.assertFalse(true);
-				}
+//				if(responseCode >= 400) {
+//					System.out.println("Found broken link : " + links.get(i).getText() + " with response code : " + responseCode);
+//				}
+				softa.assertTrue(responseCode<400, "Found broken link : " + links.get(i).getText() + " with response code : " + responseCode);
 				
 			} catch (MalformedURLException e) {
 				e.printStackTrace();
@@ -63,5 +66,6 @@ public class BrokenLinks {
 				e.printStackTrace();
 			}
 		}
+		softa.assertAll();
 	}
 }
